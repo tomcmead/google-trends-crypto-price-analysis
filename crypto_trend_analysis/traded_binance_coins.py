@@ -1,9 +1,14 @@
+import pycoingecko 
 import binance.client
 import random, time
 
 class TradedBinanceCoins:
     """ Computes all tradable coins on the Binance platorm, stores each CoinGecko ID, symbol and name. """
+    coingecko_api = None
     
+    def __init__(self):
+        self.coingecko_api = pycoingecko.CoinGeckoAPI()
+
     def tradableBinanceTickers(self):
         """ Computes all tradeable coins on the Binance platform """
 
@@ -45,7 +50,7 @@ class TradedBinanceCoins:
         return binance_tickers
 
 
-    def tickerToNames(self, coingecko_api, tickers):
+    def tickerToNames(self, tickers):
         """ Returns CoinGecko ID, symbol and name from each coin symbol passed """
         
         coin_info = []
@@ -55,7 +60,7 @@ class TradedBinanceCoins:
         for i in tickers:
             tickers_lower.append(i.lower())
 
-        for x in coingecko_api.get_coins_list():
+        for x in self.coingecko_api.get_coins_list():
             if(x.get('symbol') in tickers_lower):
                 coin_info.append(x)
 

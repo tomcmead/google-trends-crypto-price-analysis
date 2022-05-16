@@ -1,5 +1,4 @@
 import crypto_trend_analysis.traded_binance_coins as BC
-import pycoingecko 
 import unittest
 
 class TestTradedBinanceCoins(unittest.TestCase):
@@ -10,11 +9,14 @@ class TestTradedBinanceCoins(unittest.TestCase):
 
     def testGetTickers(self):
         bc = BC.TradedBinanceCoins()
-        cg = pycoingecko.CoinGeckoAPI()
+
         tickers = bc.tradableBinanceTickers()
-        coins = bc.tickerToNames(cg, tickers)
+        coins = bc.tickerToNames(tickers)
+        
         for coin in coins:
+            print(coin)
             self.assertIsNotNone(coin)
+        
 
 if __name__ == "__main__":
     unittest.main()
