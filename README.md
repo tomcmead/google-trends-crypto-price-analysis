@@ -35,10 +35,10 @@ Cryptocurrency price predictions based on Google Trends analysis of the crypto a
 Testing has revealed Google Trends interest of a cryptocurrency significently increases before the price increases. From this cryptocurrencies of greater interest are predicted to increase in price, if there is a postive price trend.
 
 ### Todo
-    * Pull Binance listed crypto asset names and tickers
-    * CoinGecko cryptocurrency price
-    * Google Trends cryptocurrency interest
-    * Analysis of all tradeable cryptocurrencies listed on Binance based on price and interest
+  * Pull Binance listed crypto asset names and tickers
+  * CoinGecko cryptocurrency price
+  * Google Trends cryptocurrency interest
+  * Analysis of all tradeable cryptocurrencies listed on Binance based on price and interest
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
