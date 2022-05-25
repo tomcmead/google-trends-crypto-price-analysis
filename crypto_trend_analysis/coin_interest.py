@@ -4,13 +4,13 @@ import random, time
 
 class CoinInterest:
     """ Computes Google trends percentage intrest of coin  within selected timeframe. 
-    Stores historical data in pandas data frame, and computes start and end avg price. """
+    Stores historical data in pandas data frame, and computes start and end avg interest. """
     start_avg_interest = 0
     end_avg_interest = 0
-    pt = None
+    trends_api = None
 
     def __init__(self):
-        self.pt = pytrends.request.TrendReq()
+        self.trends_api = pytrends.request.TrendReq()
 
     def formatDate(self, from_time, to_time):
             """ Convert datetime type to string format required for Google trends """
@@ -31,14 +31,14 @@ class CoinInterest:
         self.end_avg_interest = statistics.mean([df_interest.iat[num_rows,0], df_interest.iat[num_rows-1,0]])
 
     def getAvgInterest(self):
-        """ return average interest at start and end of time range as percentage """
+        """ Return average interest at start and end of time range as percentage """
         return self.start_avg_interest, self.end_avg_interest
 
 
     def coinInterest(self, coin, from_time=None, to_time=None, hours=4):   
         """ Compute Google trends coin interest as pandas dataframe for given timeframe """
         if from_time!=None and to_time!=None:
-            time_fr = self.format_date(from_time, to_time)
+            time_fr = self.formatDate(from_time, to_time)
         else:
             if(hours==1):
                 time_fr = "now 1-H"
@@ -52,8 +52,8 @@ class CoinInterest:
 
         while(api_request):
             try:
-                self.pt.build_payload(kw_list=[str(coin)], cat=0, timeframe=time_fr, geo='', gprop='')
-                df_interest = self.pt.interest_over_time()
+                self.trends_api.build_payload(kw_list=[str(coin)], cat=0, timeframe=time_fr, geo='', gprop='')
+                df_interest = self.trends_api.interest_over_time()
                 api_request = False
             except Exception as e:
                 print(f"Error: {e.args}")
