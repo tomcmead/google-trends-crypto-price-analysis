@@ -10,7 +10,8 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-      <li><a href="#todo">Todo</a></li>
+        <li><a href="#current-implementation">Current Implementation</a></li>
+        <li><a href="#todo">Todo</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -34,15 +35,18 @@ Cryptocurrency price predictions based on Google Trends analysis of the crypto a
 
 Testing has revealed Google Trends interest of a cryptocurrency significently increases before the price increases. From this cryptocurrencies of greater interest are predicted to increase in price, if there is a postive price trend.
 
-### Todo
+### Current Implementation
   * Pull Binance listed crypto asset names and tickers
   * CoinGecko cryptocurrency price
   * Google Trends cryptocurrency interest
-  * Analysis of all tradeable cryptocurrencies listed on Binance based on price and interest
+  * Analysis of all tradeable cryptocurrencies listed on Binance based on price and interest, generates overlapping graph of price and interest
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### Todo
+  * Advanced analysis of coinprice and interest, currently data is only graphed
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
 
