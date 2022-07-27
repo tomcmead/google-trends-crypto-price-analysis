@@ -1,3 +1,4 @@
+from keyword import kwlist
 import pytrends.request
 import statistics
 import random, time
@@ -5,10 +6,9 @@ import random, time
 class CoinInterest:
     """ Computes Google trends percentage intrest of coin  within selected timeframe. 
     Stores historical data in pandas data frame, and computes start and end avg interest. """
-    trends_api = None
 
     def __init__(self):
-        self.trends_api = pytrends.request.TrendReq()
+        self.trends_api = pytrends.request.TrendReq(hl='en-US', tz=0, retries=1000, backoff_factor=0.1)
 
     def formatDate(self, from_time, to_time):
             """ Convert datetime type to string format required for Google trends """
@@ -42,20 +42,9 @@ class CoinInterest:
             elif(hours==24):
                 time_fr = "now 1-d"
 
-        api_request = True
-        attempts = 1
-
-        while(api_request):
-            try:
-                self.trends_api.build_payload(kw_list=[str(coin)], cat=0, timeframe=time_fr, geo='', gprop='')
-                df_interest = self.trends_api.interest_over_time()
-                api_request = False
-            except Exception as e:
-                print(f"Error: {e.args}")
-                time.sleep(15 ** attempts + random.uniform(0, 3600))
-                attempts += 1
-
         try:
+            self.trends_api.build_payload(kw_list=[str(coin)], cat=0, timeframe=time_fr, geo='', gprop='')
+            df_interest = self.trends_api.interest_over_time()
             df_interest.drop(df_interest.columns[[1]], axis=1, inplace=True)
             return df_interest
         except Exception as e:
