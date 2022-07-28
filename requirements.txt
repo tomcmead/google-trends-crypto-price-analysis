@@ -1,0 +1,5 @@
+python-binance
+pycoingecko
+pytrends
+pandas
+matplotlib
