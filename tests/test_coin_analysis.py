@@ -11,17 +11,23 @@ class TestCoinCoinAnalysis(unittest.TestCase):
 
     def testGraphPriceInterest(self):
         cp = CP.CoinPrice()
-        coin_price = cp.coinPrice("solana", "2022-01-09-10", "2022-01-10-10")
-        for price in coin_price:
-            self.assertIsNotNone(price)
+        df_coin_prices = cp.coinPrices("solana", hours=1)
+        for coin_price in df_coin_prices:
+            self.assertIsNotNone(coin_price)
 
         ci = CI.CoinInterest()
-        coin_interest = ci.coinInterest("solana", "2022-01-09-10", "2022-01-10-10")
-        for interest in coin_interest:
-            self.assertIsNotNone(interest)
+        df_coin_interest = ci.coinInterest("solana", hours=1)
+        for coin_interest in df_coin_interest:
+            self.assertIsNotNone(coin_interest)
 
         ca = CA.CoinAnalysis()     
-        self.assertIsNone(ca.graphPriceInterest(coin_price, coin_interest))
+        self.assertIsNone(ca.graphPriceInterest(df_coin_prices, df_coin_interest))
+
+    def testTrendingCoins(self):
+        ca = CA.CoinAnalysis()
+    
+        ca.trendingCoins()
+
     
 
 if __name__ == "__main__":
