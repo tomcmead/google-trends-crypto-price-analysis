@@ -7,20 +7,17 @@ class TestCoinInterest(unittest.TestCase):
     def setUpClass(cls):
         print("Coin interest testing starting...")
 
-    def testCoinInterest(self):
+    def testCoinInterestHour(self):
         ci = CI.CoinInterest()
-        interest = ci.coinInterest("Bitcoin")
-        ci.avgInterest(interest)
+        df_interest = ci.coinInterest("Bitcoin", hours=1) 
+        for coin_interest in df_interest: 
+            self.assertIsNotNone(coin_interest)
 
-        for i in interest:
-            self.assertIsNotNone(i)
-        
-        start_interest, end_interest = ci.getAvgInterest()
-        print("Start Google Trends Interest = {:.4f}%".format(start_interest))
-        print("End Google Trends Interest = {:.4f}%".format(end_interest))
-        
-        self.assertIsNotNone(start_interest)
-        self.assertIsNotNone(end_interest)
+    def testCoinInterestDate(self):
+        ci = CI.CoinInterest()
+        df_interest = ci.coinInterest("Bitcoin", from_time="2022-01-09-10", to_time="2022-01-10-10")   
+        for coin_interest in df_interest: 
+            self.assertIsNotNone(coin_interest)
 
 
 if __name__ == "__main__":
